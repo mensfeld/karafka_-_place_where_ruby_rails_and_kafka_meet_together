@@ -1,0 +1,746 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Karafka - The place where Ruby, Rails and Kafka meet together</title>
+
+		<meta name="description" content="Karafka - The place where Ruby, Rails and Kafka meet together">
+		<meta name="author" content="Maciej Mensfeld">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme.css" id="theme">
+		<link rel="stylesheet" href="css/custom.css" id="theme">
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<div class="slides">
+				<section>
+          <img src="img/karafka-04.png" style="border: none; box-shadow: 0 0 0 0 #fff; width: 50%"/>
+					<h3>The place where Ruby, Rails and Kafka meet together</h3>
+				</section>
+
+				<section>
+					<h2>$ whoami</h2>
+
+					<p>
+            <a href="http://mensfeld.pl">Maciej Mensfeld</a>
+          </p>
+
+					<p>
+						<ul style="list-style: none; text-align: center;">
+							<li>
+								Software Engineer (10 years with Ruby)
+							</li>
+							<li>
+								<a href="https://github.com/karafka/karafka">Karafka</a> creator
+							</li>
+							<li>
+								Founder of <a href="https://coditsu.io">Coditsu</a> - a comprehensive platform for insightful code analysis
+							</li>
+						</ul>
+          </p>
+				</section>
+
+				<section>
+					<h2>$ whoami</h2>
+
+					<p>
+            www: <a href="https://coditsu.io">coditsu.io</a> <br>
+            www: <a href="http://mensfeld.pl">mensfeld.pl</a> <br>
+            twitter: <a href="http://twitter.com/maciejmensfeld">@maciejmensfeld</a> <br>
+            e-mail: <a href="mailto:maciej@coditsu.io">maciej@coditsu.io</a>
+          </p>
+				</section>
+
+				<section>
+					<h2>Please notify me if...</h2>
+
+					<ul>
+						<li>
+							I speak 2 fast
+						</li>
+						<li>
+							I should repeat anything
+						</li>
+						<li>
+							I should explain something better
+						</li>
+						<li>
+							You have any questions
+						</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Agenda</h2>
+
+					<ul>
+						<li>What is Kafka?</li>
+						<li>Kafka + Ruby</li>
+						<li>Karafka introduction</li>
+						<li>Karafka on Rails</li>
+						<li>Karafka use case example</li>
+					</ul>
+				</section>
+
+				<section>
+          <img src="img/kafka.png" style="border: none; box-shadow: 0 0 0 0 #fff; width: 70%"/>
+				</section>
+
+				<section>
+					<h2>What is Kafka?</h2>
+
+					<h4>A distributed streaming platform</h4>
+					<h4>A high-throughput distributed messaging system</h4>
+				</section>
+
+				<section>
+					<h2>What is Kafka?</h2>
+
+					<ul>
+						<li>
+							Kafka is designed to allow a single cluster to serve as the central data backbone for a large organization
+						</li>
+						<li>
+							It can be elastically and transparently expanded without downtime
+						</li>
+						<li>
+							It provides broadcasting to many applications
+						</li>
+						<li>
+							Allows to build systems that are event based
+						</li>
+					</ul>
+				</section>
+
+				<section>
+         <h2>Who uses Kafka?</h2>
+
+          <ul style="padding-right: 10%;">
+            <li>Linkedin</li>
+            <li>Yahoo</li>
+            <li>Twitter</li>
+            <li>Netflix</li>
+            <li>Square</li>
+            <li>Spotify</li>
+            <li>Pinterest</li>
+            <li>Uber</li>
+          </ul>
+
+          <ul>
+            <li>Tumblr</li>
+            <li>Cisco</li>
+            <li>Foursquare</li>
+            <li>Shopify</li>
+            <li>Oracle</li>
+            <li>Urban Airship</li>
+            <li>OVH</li>
+            <li>And many more...</li>
+          </ul>
+        </section>
+
+				<section>
+         <h3>How Kafka works?</h3>
+
+          <img src="img/kafka-apis.png" style="width: 50%"/>
+       </section>
+
+				<section>
+         <h3>How Kafka works?</h3>
+
+          <img src="img/log_anatomy.png"/>
+       </section>
+
+				<section>
+         <h3>How Kafka works?</h3>
+
+          <img src="img/consumer-groups.png"/>
+       </section>
+
+				<section>
+          <img src="img/kafka.png" style="border: none; box-shadow: 0 0 0 0 #fff; width: 30%"/>
+          <br/>
+          +
+          <br/>
+          <br/>
+          <img src="img/ruby.gif" style="border: none; box-shadow: 0 0 0 0 #fff; width: 20%"/>
+				</section>
+
+				<section>
+					<h2>Kafka + Ruby</h2>
+
+					<ul>
+						<li><a href="https://github.com/joekiller/jruby-kafka">jruby-kafka</a></li>
+						<li><a href="https://github.com/bpot/poseidon">poseidon</a></li>
+						<li><a href="https://github.com/zendesk/ruby-kafka">ruby-kafka</a></li>
+						<li><a href="https://github.com/klarna/phobos">phobos</a></li>
+						<li><a href="https://github.com/karafka">karafka</a></li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Kafka + Ruby</h2>
+					<h3>jruby-kafka</h3>
+
+					<ul>
+						<li>Just a wrapper around the official Kafka Java client</li>
+						<li>Won't work with cRuby based apps</li>
+						<li>Requires reading Java docs ;(</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Kafka + Ruby</h2>
+					<h3>poseidon</h3>
+
+					<ul>
+						<li>Not maintained</li>
+						<li>Still working if used with 0.8 Kafka API</li>
+						<li>Does not support consumer groups</li>
+						<li>Still used by some companies</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Kafka + Ruby</h2>
+					<h3>ruby-kafka</h3>
+
+					<ul>
+						<li>Maintained</li>
+						<li>0.9+ API support</li>
+						<li>Sync and async producers</li>
+						<li>Sponsored by Zendesk</li>
+						<li>Default Karafka driver</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Kafka + Ruby</h2>
+					<h3>phobos</h3>
+
+					<ul>
+						<li>Maintained</li>
+						<li>0.9+ API support</li>
+						<li>Wrapper around ruby-kafka</li>
+						<li>Simplifies RAW ruby-kafka usage by adding configurators</li>
+					</ul>
+				</section>
+
+				<section>
+          <img src="img/karafka-04.png" style="border: none; box-shadow: 0 0 0 0 #fff; width: 70%"/>
+
+					<h3>A story of getting things done</h3>
+				</section>
+
+				<section>
+          <h2>What is Karafka?</h2>
+
+          <ul>
+            <li>It is a microframework </li>
+            <li>It was designed to simplify Kafka based applications development</li>
+            <li>It allows developers to build "Rails like" apps that consume and produce messages</li>
+          </ul>
+        </section>
+
+				<section>
+          <h3>Why we developed Karafka?</h3>
+
+          <p>
+          	We've needed a tool that would allow us to:
+          </p>
+
+          <ul>
+            <li>build applications faster</li>
+            <li>process faster</li>
+            <li>handle events and messages from many sources and process them the same way</li>
+          </ul>
+        </section>
+
+				<section>
+          <h3>Why we developed Karafka?</h3>
+          <h4>Developers should focus on the business logic</h4>
+
+          <p>
+          	But:
+          </p>
+
+          <ul>
+          	<li>threads</li>
+          	<li>signals</li>
+          	<li>connection management</li>
+          	<li>load balancing</li>
+          	<li>connection failures / reconnections</li>
+          </ul>
+
+          <p>
+          	aren't business logic
+          </p>
+        </section>
+
+				<section>
+          <h3>Why even bother with messaging when there is HTTP and REST?</h3>
+
+          <ul>
+            <li>HTTP does not provide broadcasting</li>
+            <li>We often need to trigger many actions based on a single event</li>
+            <li>We didn't want to maintain internal API clients</li>
+          </ul>
+        </section>
+
+				<section>
+          <h3>Why even bother with messaging when there is HTTP and REST?</h3>
+
+          <ul>
+            <li>With a message broker you can replace microservices transparently</li>
+            <li>You can obtain better microservices isolation</li>
+            <li>Because you can create new microservices that use multiple different events from many sources</li>
+          </ul>
+        </section>
+
+				<section>
+          <h2>It really is about messaging</h2>
+        </section>
+
+				<section>
+          <h2>Real life is asynchronous</h2>
+        </section>
+
+				<section>
+          <h2>So, why our apps aren't?</h2>
+        </section>
+
+        <section>
+          <h3>Karafka uses goods that are already well known</h3>
+
+          <ul>
+            <li><a href="https://github.com/zendesk/ruby-kafka">ruby-kafka</a></li>
+            <li><a href="https://github.com/celluloid/celluloid">Celluloid</a> to introduce sockets clustering inside threads</li>
+            <li><a href="https://github.com/mperham/sidekiq">Sidekiq</a> to support background data processing (not required)</li>
+            <li><a href="https://github.com/rails/rails">Rails</a> app structure concept for bigger apps</li>
+            <li><a href="https://github.com/sinatra/sinatra">Sinatra</a> app structure concept for small apps</li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>Karafka framework components</h3>
+
+          <p>
+            Karafka is combined from few logical parts:
+          </p>
+
+          <ul>
+            <li>Messages Consumer</li>
+            <li>Router</li>
+            <li>Application Responder</li>
+            <li>Application Controller</li>
+            <li>Application Worker</li>
+            <li>CLI</li>
+          </ul>
+        </section>
+
+        <section>
+          <h4>Karafka framework components</h4>
+
+          <img src="img/karafka3.png" style="max-width: 45%"/>
+        </section>
+
+        <section>
+          <h3>How to use it?</h3>
+
+<pre><code data-trim>
+# Gemfile
+source 'https://rubygems.org'
+
+gem 'karafka'
+</code></pre>
+
+<pre><code data-trim>
+bundle install
+bundle exec karafka install
+</code></pre>
+
+          <p>
+            Edit app.rb and update configuration settings
+          </p>
+
+          <p>
+          All the configutation options are described here:<br/><a href="https://github.com/karafka/karafka">github.com/karafka/karafka</a>
+          </p>
+
+        </section>
+
+        <section>
+          <h3>Karafka conventions and features</h3>
+        </section>
+
+        <section>
+          <h3>Karafka conventions and features</h3>
+
+          <p>
+            Karafka has a routing engine
+          </p>
+
+
+<pre><code data-trim>
+App.routes.draw do
+  # If you work with JSON data, only controller is required
+  topic :videos_created do
+    controller Videos::VideosCreatedController
+  end
+
+  topic :incoming_messages do
+    group :composed_application
+    controller Videos::DetailsController
+    worker Workers::DetailsWorker
+    parser Parsers::BinaryToJson
+    interchanger Interchangers::Binary
+  end
+end
+</code></pre>
+
+        </section>
+
+        <section>
+          <h3>Karafka conventions and features</h3>
+
+<pre><code data-trim>
+NewVideosController       #=> NewVideosWorker
+Users::PaymentsController #=> Users::PaymentsWorker
+</code></pre>
+
+          <p>
+            By default Karafka builds a worker class per controller based on a controller name.
+            <br/>
+            <br/>
+            This will allow you to prioritize (if needed) Sidekiq workers
+          </p>
+
+
+        </section>
+
+        <section>
+          <h3>Karafka conventions and features</h3>
+
+          <p>
+            You can overwrite all of the default behaviours
+          </p>
+
+<pre><code data-trim>
+App.routes.draw do
+  topic :new_videos do
+    controller Videos::NewVideosController
+    # Instead of a default Videos::NewVideosWorker
+    worker Videos::DifferentWorker
+  end
+end
+</code></pre>
+        </section>
+
+
+        <section>
+          <h3>Karafka conventions and features</h3>
+          <h4>Karafka controllers are simple	</h4>
+
+          <p>
+            All you need is a #perform method that will be executed asynchronously in response to an incoming message
+          </p>
+<pre><code data-trim>
+class CreateVideosController < Karafka::BaseController
+  def perform
+    Video.create!(params[:video])
+  end
+end
+</code></pre>
+        </section>
+
+        <section>
+          <h3>Karafka conventions and features</h3>
+
+          <p>
+            #before_enqueue filter that acts in a similar way to Rails #before_action
+          </p>
+<pre><code data-trim>
+class CreateVideosController < Karafka::BaseController
+  before_enqueue -> {
+    throw(:abort) if params[:sent_at] < 1.minute.ago
+  }
+end
+</code></pre>
+
+          <p>
+            It can be used to provide first layer data filtering. If it throws :abort, Sidekiq task won't be scheduled
+          </p>
+        </section>
+
+        <section>
+          <h4>Karafka conventions and features</h4>
+
+There are also few usefull CLI commands available:
+
+<pre><code data-trim>
+bundle exec karafka [COMMAND]
+
+karafka console
+karafka flow
+karafka help [COMMAND]
+karafka info
+karafka install
+karafka routes
+karafka server
+karafka worker
+</pre></code>
+        </section>
+
+        <section>
+          <h3>Karafka conventions and features</h3>
+
+<p>
+	Responders help preventing bugs when you design a receive-respond applications that handle multiple incoming and outgoing topics.
+</p>
+
+<pre><code data-trim>
+class ExampleResponder < ApplicationResponder
+  topic :users_notified
+
+  def respond(user)
+    respond_to :users_notified, user
+  end
+end
+</pre></code>
+        </section>
+
+
+        <section>
+          <h3>Karafka performance</h3>
+
+          <ul>
+            <li>Is strongly dependent on what you do in your code</li>
+            <li>Redis performance (for Sidekiq) is a factor as well (if used)</li>
+            <li>Message size is a factor</li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>Karafka performance</h3>
+
+          <ul>
+            <li>Single process can handle around 30 000 messages/sec</li>
+            <li>Less than a ms to send a message with the slowest (secure) mode (Kafka request.required.acks -1) </li>
+            <li>Less than 1/10 of a ms to send a message with in the 0 mode (Kafka request.required.acks 0) </li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>Karafka framework scalability</h3>
+
+          <p>
+            Each scaling strategy targets a different problem
+          </p>
+
+          <p>
+            Scaling strategies can be combined
+          </p>
+
+          <p>
+            Following strategies are available:
+          </p>
+
+          <ul>
+            <li>Scaling using multiple Karafka threads</li>
+            <li>Scaling using Kafka partitions</li>
+            <li>Scaling using Karafka clusterization</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Karafka on Rails</h2>
+        </section>
+
+        <section>
+          <h2>Karafka on Rails</h2>
+          <ul>
+          	<li>Karafka is distributed as a single gem, so it can become a part of any Ruby on Rails app easily</li>
+          	<li>Using Karafka from your existing Rails apps allows you to make big changes by making small steps</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Karafka on Rails</h2>
+
+          <ul>
+            <li>Start by generating messages from your current applications via
+                <a href="https://github.com/karafka/waterdrop">WaterDrop</a>
+            </li>
+            <li>With WaterDrop you can tell your Karafka apps what your other Ruby components are doing</li>
+          </ul>
+
+<pre><code data-trim>
+def create
+  video = Video.create!(params[:video])
+  WaterDrop::Message.new(:video_created, video.to_json).send!
+  respond_with video
+end
+</pre></code>
+        </section>
+
+        <section>
+          <h2>Karafka use case example</h2>
+        		<img src="img/logo_gray.svg" style="background: none; border: none; box-shadow: 0 0 0 0 #fff; width: 500%"/>
+        </section>
+
+        <section>
+          <h3>
+          	Kafka + Karafka
+          	<br>
+          	as an event sourcing backbone
+        	</h3>
+
+          <p>
+          	Coditsu is a comprehensive platform for insightful code analysis,
+          	automated code review and programmers work and habits evaluation.
+          </p>
+         </section>
+
+        <section>
+          <h3>
+          	Kafka + Karafka
+          	<br>
+          	as an event sourcing backbone
+        	</h3>
+
+          <ul>
+          	<li>
+          		10 Ruby on Rails + Karafka separate applications
+          	</li>
+
+          	<li>
+          		500-800 daily commit analysis (each from 15-20 perspectives)
+          	</li>
+
+          	<li>
+          		300+ daily monitored programmers
+          	</li>
+
+          	<li>
+          		2mln+ offenses detected
+          	</li>
+
+          	<li>
+          		60k+ daily analysis and insights metric points
+          	</li>
+          </ul>
+         </section>
+
+				<section>
+          <h3>
+          	Kafka + Karafka
+          	<br>
+          	as an event sourcing backbone
+        	</h3>
+
+
+          <img src="img/diagr.png" style="border: none; box-shadow: 0 0 0 0 #fff; width: 70%"/>
+				</section>
+
+        <section>
+          <h3>
+          	Kafka + Karafka
+          	<br>
+          	as an event sourcing backbone
+        	</h3>
+
+        	<ul>
+        		<li>Every single information that is significant goes through Kafka</li>
+        		<li>Applications don't care about origin of an event/message</li>
+        		<li>Downtimes aren't problem as applications will catch-up to the current state</li>
+        	</ul>
+      	</section>
+
+        <section>
+          <h2>WANT TO CONTRIBUTE?</h2>
+
+          <p>
+            <a href="https://github.com/karafka">github.com/karafka</a>
+          </p>
+
+
+          <p>
+            <img src="img/github.png" style="background: none; border: none; box-shadow: 0 0 0 0 #fff; margin: 0; padding: 0;"/>
+          </p>
+
+          <ul>
+            <li>The more people star it, the more people use it</li>
+            <li>The more people use it, the more people star it</li>
+            <li>There are many issues you can help us fix</li>
+          </ul>
+        </section>
+
+
+        <section>
+          <h2>READ MORE</h2>
+
+          <ul>
+            <li><a href="https://github.com/karafka/karafka">github.com/karafka/karafka</a></li>
+            <li><a href="https://github.com/karafka">github.com/karafka</a></li>
+            <li><a href="http://mensfeld.pl/tag/karafka">mensfeld.pl/tag/karafka</a></li>
+            <li><a href="http://kafka.apache.org/">kafka.apache.org</a></li>
+          </ul>
+        </section>
+
+        <section>
+          <h1>THE END - Q &amp; A</h1>
+
+          <ul style="text-align: center; list-style: none;">
+            <li><a href="https://github.com/karafka">github.com/karafka</a></li>
+            <li><a href="mailto:maciej@coditsu.io">maciej@coditsu.io</a></li>
+            <li><a href="http://twitter.com/maciejmensfeld">@maciejmensfeld</a></li>
+            <li><a href="https://coditsu.io">coditsu.io</a></li>
+          </ul>
+        </section>
+			</div>
+
+		  <div class='logo'>
+        <img src="img/logo_gray.svg" style="background: none; border: none; box-shadow: 0 0 0 0 #fff;"/>
+		  </div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
